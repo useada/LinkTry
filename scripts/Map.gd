@@ -32,29 +32,39 @@ func make_map():
 func randTile():
 	return randi() %  (start_num + level)
 
+func selectTile(tile, tile_pos):
+	first_tile = tile
+	first_pos = tile_pos
+	Lighter.refresh(tile_pos)
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			var tile_pos = Map.world_to_map(event.position)
+			print(event.position)
+			print(get_node(".").position)
+			var map_pos = get_node(".").position
+			var pos = event.position - map_pos
+			var tile_pos = Map.world_to_map(pos)
 			var tile = Map.get_cell(tile_pos.x, tile_pos.y)
 			if tile < 0:
+				print("no tile")
 				return
 			# 如果没缓存，赋值并高亮
 			if first_tile == null:
-				first_tile = tile
-				first_pos = tile_pos
-				Lighter.refresh(tile_pos)
+				selectTile(tile, tile_pos)
 			else:
 				if first_pos == tile_pos: # 如果是相同的位置 不处理
 					return
 				if first_tile != tile: # 如果标题不一样，恢复 则去除高亮
 					match_fail()
+					selectTile(tile, tile_pos)
 				else: # 检查是否超过2个拐点
 					var isSuccess = Map.recalculate_path(first_pos, tile_pos)
 					if isSuccess:
 						match_success(tile_pos)
 					else:
 						match_fail()
+						selectTile(tile, tile_pos)
 # 重置缓存					
 func reset_cache():
 	first_tile = null

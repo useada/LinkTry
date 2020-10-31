@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="连连看"
+config/name="linkgame"
 run/main_scene="res://tscn/Main.tscn"
 config/icon="res://linkTryImg.png"
 
@@ -25,7 +25,11 @@ settings="*res://scripts/settings.gd"
 
 [display]
 
-window/size/height=747
+window/size/width=720
+window/size/height=1280
+window/size/resizable=false
+window/size/test_width=360
+window/size/test_height=640
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 

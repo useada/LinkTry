@@ -1,9 +1,9 @@
 extends TileMap
 
 const GRID_START = [1, 1]
-const GRID_END = [14, 10]
+const GRID_END = [9, 12]
 
-var map_size = Vector2(16, 12)
+var map_size = Vector2(11, 14)
 
 var _point_path : Array = []
 var zero_points = []
